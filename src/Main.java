@@ -13,6 +13,8 @@ public class Main extends Operations {
         zipFiles("C:/Games/savegames/zip.zip", SAVESLIST);
         deleteFiles(SAVESLIST);
         openZip("C:/Games/savegames/zip.zip", "C:/Games/savegames");
-        openProgress(SAVESLIST);
+        System.out.println(openProgress("C:/Games/savegames/savegame1.dat"));
+        System.out.println(openProgress("C:/Games/savegames/savegame2.dat"));
+        System.out.println(openProgress("C:/Games/savegames/savegame3.dat"));
     }
 }

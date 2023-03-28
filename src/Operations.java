@@ -84,8 +84,9 @@ public class Operations {
             while ((entry = zis.getNextEntry()) != null) {
                 name = entry.getName();
                 try (FileOutputStream fos = new FileOutputStream(dirToSave + "/" + name)) {
-                    while (zis.read() != -1){
-                        fos.write(zis.read());
+                    int c;
+                    while ((c = zis.read()) != -1){
+                        fos.write(c);
                     }
                     fos.flush();
                     zis.closeEntry();
@@ -97,13 +98,11 @@ public class Operations {
 
     }
 
-    public static GameProgress openProgress(List<String> filesToPrint) {
-        for (String file : filesToPrint) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                return (GameProgress) ois.readObject();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+    public static GameProgress openProgress(String saveGame) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(saveGame))) {
+            return (GameProgress) ois.readObject();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
